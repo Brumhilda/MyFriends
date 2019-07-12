@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFriends", "MyFriends\MyFriends.csproj", "{DCFD2139-9181-4110-B31F-F8A2FDFA4368}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFriends.Core", "MyFriends.Core\MyFriends.Core.csproj", "{E5AEA3F9-53D6-463E-929F-98E9BC95B26F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFriends.Api", "MyFriends.Api\MyFriends.Api.csproj", "{E53A6EC5-807A-4E2E-8879-2C2CD20E3254}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +17,13 @@ Global
 		{DCFD2139-9181-4110-B31F-F8A2FDFA4368}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCFD2139-9181-4110-B31F-F8A2FDFA4368}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCFD2139-9181-4110-B31F-F8A2FDFA4368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5AEA3F9-53D6-463E-929F-98E9BC95B26F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5AEA3F9-53D6-463E-929F-98E9BC95B26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5AEA3F9-53D6-463E-929F-98E9BC95B26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5AEA3F9-53D6-463E-929F-98E9BC95B26F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53A6EC5-807A-4E2E-8879-2C2CD20E3254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53A6EC5-807A-4E2E-8879-2C2CD20E3254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53A6EC5-807A-4E2E-8879-2C2CD20E3254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53A6EC5-807A-4E2E-8879-2C2CD20E3254}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

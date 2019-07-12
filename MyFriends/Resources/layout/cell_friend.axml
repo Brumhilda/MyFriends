@@ -3,10 +3,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android" 
     android:orientation="vertical" 
     android:layout_width="match_parent" 
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
     <TextView
-        android:id="@+id/Cell_Friend_Title"
+        android:id="@+id/Cell_Friend_Name"
+        style="@style/TitleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Лизка Бульк"/>
+    <TextView
+        android:id="@+id/Cell_Friend_Email"
+        style="@style/StandardText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="lizka030697@gmail.com"/>
+	<RadioButton
+		android:id="@+id/Cell_Friend_IsActive"
+        android:theme="@style/ActiveChecker"
+        android:checked="true"
+		android:text="online"
+        android:textSize="18dp"
+        android:textColor="@drawable/active_cheker_selector"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+        android:scaleX="0.7"
+        android:scaleY="0.7"/>
+    <View
+        android:background="@color/material_grey_100"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"/>
 </LinearLayout>

@@ -1,13 +1,12 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Content;
-using Android.Widget;
 using Android.Support.V7.Widget;
 using MyFriends.Resources;
+using MyFriends.Api.Implementations;
+using System.Collections.Generic;
+using MyFriends.Api.DTOs;
 
 namespace MyFriends
 {
@@ -24,15 +23,29 @@ namespace MyFriends
             FriendsList.HasFixedSize = false;
 
             FriendsList.SetLayoutManager(new LinearLayoutManager(this));
-            var adapter = new RecyclerViewAdapter();
+            var adapter = new RecyclerViewAdapter(GetFriendsList());
             adapter.ItemClick += OnItemClick;
             FriendsList.SetAdapter(adapter);
+
+            MyFriendsApi api = new MyFriendsApi();
+            //string res = api.GetUsers(new System.Threading.CancellationToken()).Result;
+        }
+
+        List<UserDTO> GetFriendsList()
+        {
+            return new List<UserDTO>
+            {
+                new UserDTO{ Name = "Liza Glukhova", Email = "lizka030697@gmail.com", IsActive = true},
+                new UserDTO{ Name = "Vasya Boolkovsky", Email = "vasya092@gmail.com", IsActive = true},
+                new UserDTO{ Name = "Dexter Morgan", Email = "dexter007@gmail.com", IsActive = false},
+                new UserDTO{ Name = "Debra Morgan", Email = "fuckingemail@gmail.com", IsActive = false}
+            };
         }
 
         void OnItemClick(object sender, int position)
-        {
+        { 
             var intent = new Intent(this, typeof(FriendDetailsActivity));
-            intent.PutExtra("text", "Hello"+position);
+            intent.PutExtra("text", "Hello \n");
             StartActivity(intent);
         }
     }
