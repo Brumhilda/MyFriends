@@ -16,11 +16,14 @@ namespace MyFriends.Resources
     [Activity(Label = "FriendDetailsActivity")]
     public class FriendDetailsActivity : Activity
     {
+        TextView Name;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.page_friend_details);
+            Name = FindViewById<TextView>(Resource.Id.Page_FriendDetails_Name);
+            Name.Text = Intent.GetStringExtra("text");
         }
     }
 }
