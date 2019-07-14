@@ -57,11 +57,13 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecyclerViewAdapter.cs" />
-    <Compile Include="FriendDetailsActivity.cs" />
+    <Compile Include="Views\FriendDetailsActivity.cs" />
+    <Compile Include="Views\FriendsActivity.cs" />
+    <Compile Include="CellFriendsViewHolder.cs" />
+    <Compile Include="Views\CellTitleWithInfoActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -97,6 +99,73 @@
     <AndroidResource Include="Resources\layout\cell_friend.axml" />
     <AndroidResource Include="Resources\layout\page_friend_details.axml" />
     <AndroidResource Include="Resources\drawable\active_cheker_selector.xml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_gender_female.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_gender_female.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_gender_female.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_gender_female.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_gender_female.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_contacts_address.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_contacts_bussines.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_contacts_email.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_contacts_location.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_contacts_phone.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_eye_blue.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_eye_brown.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_eye_green.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_fruit_apple.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_fruit_banana.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_fruit_strawberry.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_gender_male.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_contacts_address.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_contacts_bussines.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_contacts_email.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_contacts_location.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_contacts_phone.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_eye_blue.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_eye_brown.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_eye_green.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_fruit_apple.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_fruit_banana.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_fruit_strawberry.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_gender_male.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_contacts_address.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_contacts_bussines.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_contacts_email.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_contacts_location.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_contacts_phone.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_eye_blue.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_eye_brown.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_eye_green.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_fruit_apple.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_fruit_banana.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_fruit_strawberry.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_gender_male.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_contacts_address.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_contacts_bussines.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_contacts_email.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_contacts_location.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_contacts_phone.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_eye_blue.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_eye_brown.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_eye_green.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_fruit_apple.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_fruit_banana.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_fruit_strawberry.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_gender_male.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_contacts_address.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_contacts_bussines.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_contacts_email.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_contacts_location.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_contacts_phone.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_eye_blue.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_eye_brown.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_eye_green.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_fruit_apple.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_fruit_banana.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_fruit_strawberry.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_gender_male.png" />
+    <AndroidResource Include="Resources\drawable\separator.xml" />
+    <AndroidResource Include="Resources\layout\cell_title_with_info.axml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
@@ -105,6 +174,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyFriends.Core\MyFriends.Core.csproj">
+      <Project>{E5AEA3F9-53D6-463E-929F-98E9BC95B26F}</Project>
+      <Name>MyFriends.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyFriends.Api\MyFriends.Api.csproj">
       <Project>{E53A6EC5-807A-4E2E-8879-2C2CD20E3254}</Project>
       <Name>MyFriends.Api</Name>
@@ -112,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

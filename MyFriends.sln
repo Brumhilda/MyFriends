@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFriends", "MyFriends\MyFriends.csproj", "{DCFD2139-9181-4110-B31F-F8A2FDFA4368}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFriends.Android", "MyFriends\MyFriends.Android.csproj", "{DCFD2139-9181-4110-B31F-F8A2FDFA4368}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFriends.Core", "MyFriends.Core\MyFriends.Core.csproj", "{E5AEA3F9-53D6-463E-929F-98E9BC95B26F}"
 EndProject

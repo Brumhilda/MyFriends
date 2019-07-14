@@ -1,11 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:orientation="vertical" 
     android:layout_width="match_parent" 
     android:layout_height="match_parent">
+    <ImageView
+        android:src="@mipmap/ic_gender_female"
+        android:id="@+id/Page_FriendDetails_Gender"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"/>
     <TextView
+        android:text="Liza Glukhova"
         android:id="@+id/Page_FriendDetails_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/Page_FriendDetails_Gender"
+        style="@style/TitleText"/>
+    <TextView
+        android:text="22 y.o."
+        android:id="@+id/Page_FriendDetails_Age"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:gravity="right|top"
+        android:layout_toRightOf="@id/Page_FriendDetails_Name"
+        style="@style/TitleText"/>
+    <TextView
+        android:text="#tag1 #tag2 #tag3"
+        android:id="@+id/Page_FriendDetails_Tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginVertical="3dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/Page_FriendDetails_Gender"/>
+    <View
+        android:id="@+id/Page_FriendDetails_Separator"
+        android:background="@color/material_grey_100"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_below="@id/Page_FriendDetails_Tags"/>
+    <TextView
+        android:text="Contacts"
+        android:id="@+id/Page_FriendDetails_ContactsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
+        android:layout_below="@id/Page_FriendDetails_Separator"
+        style="@style/StandardText"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Page_FriendDetails_InfoList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Page_FriendDetails_ContactsTitle"
+        />
+</RelativeLayout>

@@ -19,9 +19,9 @@ namespace MyFriends
 
         public class RecyclerViewHolder : RecyclerView.ViewHolder
         {
-            public TextView Name { get; set; }
-            public TextView Email { get; set; }
-            public RadioButton IsActive { get; set; }
+            public TextView Name;
+            public TextView Email;
+            public RadioButton IsActive;
 
             public RecyclerViewHolder(View cell, Action<int> listener)
                 : base(cell)

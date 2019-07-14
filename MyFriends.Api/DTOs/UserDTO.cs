@@ -5,21 +5,21 @@ namespace MyFriends.Api.DTOs
     public class UserDTO : BaseDTO
     {
         public bool IsActive { get;  set; }
-        public string Balance { get; protected set; }
-        public int Age { get; protected set; }
-        public EyeColorType EyeColor { get; protected set; }
+        public string Balance { get; set; }
+        public int Age { get; set; }
+        public EyeColorType EyeColor { get; set; }
         public string Name { get;  set; }
-        public GenderType Gender { get; protected set; }
-        public string Company { get; protected set; }
+        public GenderType Gender { get; set; }
+        public string Company { get; set; }
         public string Email { get;  set; }
-        public string Phone { get; protected set; }
-        public string Address { get; protected set; }
-        public string About { get; protected set; }
-        public string Registered { get; protected set; }
-        public float Latitude { get; protected set; }
-        public float Longitude { get; protected set; }
-        public List<string> Tags { get; protected set; }
-        public List<string> FriendsIds { get; protected set; }
-        public FruitType FavoriteFruit { get; protected set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string About { get; set; }
+        public string Registered { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public List<string> Tags { get; set; }
+        public List<UserDTO> Friends { get; set; }
+        public FruitType FavoriteFruit { get; set; }
     }
 }

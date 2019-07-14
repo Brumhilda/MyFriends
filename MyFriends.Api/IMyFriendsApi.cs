@@ -1,10 +1,12 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using MyFriends.Api.DTOs;
 
 namespace MyFriends.Api
 {
     public interface IMyFriendsApi
     {
-        Task<string> GetUsers(CancellationToken token);
+        Task<List<UserDTO>> GetUsers(CancellationToken token);
     }
 }
