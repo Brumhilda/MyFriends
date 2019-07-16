@@ -3281,13 +3281,10 @@ namespace MyFriends
 			public const int Page_FriendDetails_Age = 2131361988;
 			
 			// aapt resource value: 0x7f0a00c6
-			public const int Page_FriendDetails_ContactsTitle = 2131361990;
+			public const int Page_FriendDetails_InfoList = 2131361990;
 			
 			// aapt resource value: 0x7f0a00c2
-			public const int Page_FriendDetails_Gender = 2131361986;
-			
-			// aapt resource value: 0x7f0a00c7
-			public const int Page_FriendDetails_InfoList = 2131361991;
+			public const int Page_FriendDetails_IsActive = 2131361986;
 			
 			// aapt resource value: 0x7f0a00c3
 			public const int Page_FriendDetails_Name = 2131361987;
@@ -3511,8 +3508,8 @@ namespace MyFriends
 			// aapt resource value: 0x7f0a0067
 			public const int forever = 2131361895;
 			
-			// aapt resource value: 0x7f0a00c8
-			public const int friendsList = 2131361992;
+			// aapt resource value: 0x7f0a00c7
+			public const int friendsList = 2131361991;
 			
 			// aapt resource value: 0x7f0a000a
 			public const int ghost_view = 2131361802;
@@ -3568,8 +3565,8 @@ namespace MyFriends
 			// aapt resource value: 0x7f0a0070
 			public const int list_item = 2131361904;
 			
-			// aapt resource value: 0x7f0a00ca
-			public const int masked = 2131361994;
+			// aapt resource value: 0x7f0a00c9
+			public const int masked = 2131361993;
 			
 			// aapt resource value: 0x7f0a009c
 			public const int message = 2131361948;
@@ -3850,8 +3847,8 @@ namespace MyFriends
 			// aapt resource value: 0x7f0a001b
 			public const int view_offset_helper = 2131361819;
 			
-			// aapt resource value: 0x7f0a00c9
-			public const int visible = 2131361993;
+			// aapt resource value: 0x7f0a00c8
+			public const int visible = 2131361992;
 			
 			// aapt resource value: 0x7f0a0043
 			public const int withText = 2131361859;
