@@ -1,27 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android" 
     android:orientation="vertical" 
     android:layout_width="match_parent" 
     android:layout_height="wrap_content">
     <TextView
         android:text="Title"
-        android:id="@+id/Cell_TitleWithInfo_Title"
-        android:layout_width="match_parent"
+        android:id="@+id/Cell_TitleWithIcon_Title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         style="@style/StandardText"/>
     <TextView
         android:text="Description"
-        android:id="@+id/Cell_TitleWithInfo_Info"
+        android:id="@+id/Cell_TitleWithIcon_Info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/Cell_TitleWithIcon_Title"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="8dp"/>
+    <ImageView
+        android:src="@mipmap/ic_fruit_strawberry"
+        android:id="@+id/Cell_TitleWithIcon_Icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/Cell_TitleWithIcon_Title"/>
     <View
-        android:id="@+id/Cell_TitleWithInfo_Separator"
+        android:id="@+id/Cell_TitleWithIcon_Separator"
         android:background="@color/material_grey_100"
         android:layout_height="1dp"
         android:layout_width="match_parent"/>
-</LinearLayout>
+</RelativeLayout>

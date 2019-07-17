@@ -4,17 +4,18 @@ using Android.OS;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using MyFriends.Adarters;
 using MyFriends.Parcelables;
+using MyFriends.Core;
 using MyFriends.Core.ViewModels;
-using MyFriends.Views;
 using MyFriends.Api.DTOs;
-using MyFriends.Api;
 using Android;
-using Android.Support.V4.Content;
+using Android.Support.V4.Content; 
 using Android.Support.V4.App;
+using Android.Net;
 
 namespace MyFriends.Resources
 {
@@ -27,6 +28,7 @@ namespace MyFriends.Resources
         RadioButton IsActive;
         TextView Tags;
         RecyclerView InfoList;
+        List<TitleWithInfoItemVM> Info;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -62,9 +64,8 @@ namespace MyFriends.Resources
                             Tags.Text = pageVM.Tags;
                             break;
                         case nameof(pageVM.UserInfo):
-                            var adapter = new CellFriendsViewAdapter(pageVM.UserInfo
-                                .Select(pair => (pair.Title, pair.Info).ToTuple())
-                                .ToList());
+                            Info = pageVM.UserInfo;
+                            var adapter = new CellFriendsViewAdapter(Info);
                             adapter.ItemClick += OnItemClick;
                             InfoList.SetAdapter(adapter);
                             break;
@@ -74,23 +75,37 @@ namespace MyFriends.Resources
                     IsActive = Convert.ToBoolean(fPO.IsActive), Age = fPO.Age, Tags = fPO.Tags,
                     Balance = fPO.Balance, About = fPO.About, Address = fPO.Address, Company = fPO.Company,
                     Guid = fPO.Guid, Id = fPO.Guid, Latitude = fPO.Latitude,
-                    Longitude = fPO.Longitude, Phone = fPO.Phone, Registered = fPO.Registered
+                    Longitude = fPO.Longitude, Phone = fPO.Phone, Registered = fPO.Registered,
+                    FavoriteFruit = fPO.FavoriteFruit.ToFruitType(), EyeColor = fPO.EyeColor.ToEyeColorType(),
+                    Gender = fPO.Gender.ToGenderType()
+                    //TODO add others
                 });
             }
         }
 
         void OnItemClick(object sender, int position)
         {
-            var intent = new Intent(Intent.ActionCall);
-            intent.SetData(Android.Net.Uri.Parse("tel:" + "+7111111"));
-            //StartActivity(intent);
-
-            ActivityCompat.RequestPermissions(this, new []{ Manifest.Permission.CallPhone }, 200);
-
-                // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
+            var RequestPhoneCall = 1;
+            var intent = new Intent(Intent.ActionDial);
+            switch (Info[position].Type)
+            {
+                case DataPairType.Phone:;
+                    intent.SetData(Android.Net.Uri.Parse("tel:" + Info[position].Info));
+                    if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.CallPhone) != Android.Content.PM.Permission.Granted)
+                        ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.CallPhone }, RequestPhoneCall);
+                    else
+                        StartActivity(intent);
+                    break;
+                case DataPairType.Email:
+                    intent = new Intent(Intent.ActionSendto);
+                    intent.SetData(Android.Net.Uri.FromParts("mailto",Info[position].Info, null));
+                    StartActivity(intent);
+                    break;
+                case DataPairType.Location:
+                    intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("geo:"+Info[position].Info));
+                    StartActivity(intent);
+                    break;
             }
-           
+        }  
     }
 }

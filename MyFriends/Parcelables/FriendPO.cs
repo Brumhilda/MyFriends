@@ -24,8 +24,8 @@ namespace MyFriends.Parcelables
         public string Address { get; set; }
         public string About { get; set; }
         public string Registered { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
         public List<string> Tags { get; set; } = new List<string>();
         public List<string> Friends { get; set; } = new List<string>();
         public string FavoriteFruit { get; set; }
@@ -75,8 +75,8 @@ namespace MyFriends.Parcelables
             Phone = parcel.ReadString();
             About = parcel.ReadString();
             Registered = parcel.ReadString();
-            Latitude = parcel.ReadDouble();
-            Longitude = parcel.ReadDouble();
+            Latitude = parcel.ReadFloat();
+            Longitude = parcel.ReadFloat();
             var tags = new string[parcel.ReadInt()];
             parcel.ReadStringArray(tags);
             Tags = tags.ToList();
@@ -107,8 +107,8 @@ namespace MyFriends.Parcelables
             dest.WriteString(Phone);
             dest.WriteString(About);
             dest.WriteString(Registered);
-            dest.WriteDouble(Latitude);
-            dest.WriteDouble(Longitude);
+            dest.WriteFloat(Latitude);
+            dest.WriteFloat(Longitude);
             dest.WriteInt(Tags.Count);
             dest.WriteStringArray(Tags.ToArray());
             dest.WriteString(FavoriteFruit);

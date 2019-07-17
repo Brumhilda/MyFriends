@@ -3,8 +3,9 @@ namespace MyFriends.Api
 {
     public enum EyeColorType
     {
-        brown,
-        green,
-        blue
+        Brown,
+        Green,
+        Blue,
+        Other
     }
 }

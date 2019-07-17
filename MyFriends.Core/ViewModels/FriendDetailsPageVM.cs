@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using MyFriends.Api.DTOs;
@@ -69,16 +69,21 @@ namespace MyFriends.Core.ViewModels
             Age = user.Age.ToString() + " y.o.";
             Tags = "#" + string.Join(" #", user.Tags);
             IsActive = user.IsActive;
+            
             UserInfo = new List<TitleWithInfoItemVM>
             {
-                new TitleWithInfoItemVM("Location" , user.Latitude+" ,"+ user.Longitude),
-                new TitleWithInfoItemVM(nameof(user.Email) , user.Email),
-                new TitleWithInfoItemVM(nameof(user.Phone) , user.Phone),
-                new TitleWithInfoItemVM(nameof(user.Address) , user.Address),
-                new TitleWithInfoItemVM(nameof(user.Balance) , user.Balance),
-                new TitleWithInfoItemVM(nameof(user.Company) , user.Company),
-                new TitleWithInfoItemVM(nameof(user.About) , user.About),
-                new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered)
+                new TitleWithIconItemVM(nameof(user.Gender), user.Gender.ToString(), DataPairType.Gender),
+                new TitleWithIconItemVM(nameof(user.EyeColor), user.EyeColor.ToString(), DataPairType.EyeColor),
+                new TitleWithIconItemVM(nameof(user.FavoriteFruit), user.FavoriteFruit.ToString(), DataPairType.Fruit),
+                new TitleWithInfoItemVM("Location" , user.Latitude.ToString(CultureInfo.CreateSpecificCulture("en-CA"))
+                +" ,"+ user.Longitude.ToString(CultureInfo.CreateSpecificCulture("en-CA")), DataPairType.Location),
+                new TitleWithInfoItemVM(nameof(user.Email) , user.Email, DataPairType.Email),
+                new TitleWithInfoItemVM(nameof(user.Phone) , user.Phone, DataPairType.Phone),
+                new TitleWithInfoItemVM(nameof(user.Address) , user.Address, DataPairType.Default),
+                new TitleWithInfoItemVM(nameof(user.Balance) , user.Balance, DataPairType.Default),
+                new TitleWithInfoItemVM(nameof(user.Company) , user.Company, DataPairType.Default),
+                new TitleWithInfoItemVM(nameof(user.About) , user.About, DataPairType.Default),
+                new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered, DataPairType.Default)
             };
         }
 

@@ -16,8 +16,8 @@ namespace MyFriends.Api.DTOs
         public string Address { get; set; }
         public string About { get; set; }
         public string Registered { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
         public List<string> Tags { get; set; }
         public List<UserDTO> Friends { get; set; }
         public FruitType FavoriteFruit { get; set; }
