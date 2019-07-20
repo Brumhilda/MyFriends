@@ -34,5 +34,10 @@ namespace MyFriends
                         ? FruitType.Strawberry
                         : FruitType.Other;
         }
+
+        public static int GetIconId(this string str)
+        {
+            return 0;
+        }
     }
 }

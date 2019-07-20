@@ -10,4 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MyFriends.Api\MyFriends.Api.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MvvmCross" Version="6.3.1" />
+  </ItemGroup>
 </Project>

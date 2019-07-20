@@ -15,7 +15,6 @@ using MyFriends.Api.DTOs;
 using Android;
 using Android.Support.V4.Content; 
 using Android.Support.V4.App;
-using Android.Net;
 
 namespace MyFriends.Resources
 {
@@ -29,6 +28,8 @@ namespace MyFriends.Resources
         TextView Tags;
         RecyclerView InfoList;
         List<TitleWithInfoItemVM> Info;
+
+        ISharedPreferences sharedPreferences;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -80,9 +81,27 @@ namespace MyFriends.Resources
                     Gender = fPO.Gender.ToGenderType()
                     //TODO add others
                 });
+
+                /*var shPref = GetSharedPreferences("myData", FileCreationMode.Private);
+
+                var json = shPref.GetString("key", "");
+                var gson = new Gson();
+                if (json != "")
+                {
+                    FriendPO friend = (FriendPO)gson.FromJson(json, (Java.Lang.Reflect.IType)typeof(FriendPO));
+                    Name.Text = friend.Name;
+                    Age.Text = friend.Age.ToString();
+                }
+
+                var editor = shPref.Edit();
+                var user = new FriendPO(new UserDTO { Name = "Lizzy", Age = 21 });
+                gson = new Gson();
+
+                editor.PutString("key", gson.ToJson(user));
+                editor.Commit();*/
             }
         }
-
+        
         void OnItemClick(object sender, int position)
         {
             var RequestPhoneCall = 1;

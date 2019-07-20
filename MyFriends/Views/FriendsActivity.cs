@@ -6,18 +6,21 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using MyFriends.Resources;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Linq;
 using MyFriends.Core.ViewModels;
 using MyFriends.Parcelables;
+using MyFriends.Api.DTOs;
+using Newtonsoft.Json;
+using Android.Content.PM;
 
 namespace MyFriends
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
     public class FriendsActivity : AppCompatActivity
     {
         FriendsPageVM pageVM;
         RecyclerView FriendsList;
-        //ISharedPreferences sharedPreferences;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,30 +31,30 @@ namespace MyFriends
             FriendsList.SetLayoutManager(new LinearLayoutManager(this));
 
             pageVM = new FriendsPageVM();
+            
             pageVM.PropertyChanged += (sender, e) => {
                 if ((e as PropertyChangedEventArgs).PropertyName == nameof(pageVM.FriendsList))
                 {
+                   // var jsonFriends = JsonConvert.SerializeObject(pageVM.FriendsList);
+                   // var editor = shPref.Edit();
+                   // editor.PutString("key", jsonFriends);
+                   // editor.Commit();
+
                     var adapter = new RecyclerViewAdapter(pageVM.FriendsList);
                     adapter.ItemClick += OnItemClick;
                     FriendsList.SetAdapter(adapter);
-                    /*pageVM.FriendsList
-                        .Select(dto => new FriendPO(dto))
-                        .ToList());*/
                 }
             };
-            pageVM.LoadingFriendsList();
 
-            /*var shPref = GetSharedPreferences("myData", FileCreationMode.Private);
-           
-            Toast.MakeText(this, shPref.GetString("key", ""), ToastLength.Short).Show();
- 
-            var editor = shPref.Edit();
-            editor.PutString("key","myvalue");
-            editor.Commit();
+            var shPref = GetSharedPreferences("myData", FileCreationMode.Private);
+            var json = shPref.GetString("key", "");
+            if (json != "")
+            {
+                var usersList = JsonConvert.DeserializeObject<List<UserDTO>>(json, new JsonSerializerSettings());
+                pageVM.FriendsList = usersList;
+            }
 
-            var h = new FriendPO();
-            var code = h.GetHashCode();*/
-
+           // pageVM.LoadingFriendsList();
         }
 
         void OnItemClick(object sender, int position)
