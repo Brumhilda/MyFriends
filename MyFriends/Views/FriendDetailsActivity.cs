@@ -27,7 +27,7 @@ namespace MyFriends.Resources
         RadioButton IsActive;
         TextView Tags;
         RecyclerView InfoList;
-        List<TitleWithInfoItemVM> Info;
+        List<BaseItemVM> Info;
 
         ISharedPreferences sharedPreferences;
 
@@ -72,33 +72,31 @@ namespace MyFriends.Resources
                             break;
                     }
                 };
-                pageVM.LoadingUserInfo(new UserDTO { Name = fPO.Name, Email = fPO.Email,
-                    IsActive = Convert.ToBoolean(fPO.IsActive), Age = fPO.Age, Tags = fPO.Tags,
-                    Balance = fPO.Balance, About = fPO.About, Address = fPO.Address, Company = fPO.Company,
-                    Guid = fPO.Guid, Id = fPO.Guid, Latitude = fPO.Latitude,
-                    Longitude = fPO.Longitude, Phone = fPO.Phone, Registered = fPO.Registered,
-                    FavoriteFruit = fPO.FavoriteFruit.ToFruitType(), EyeColor = fPO.EyeColor.ToEyeColorType(),
-                    Gender = fPO.Gender.ToGenderType()
-                    //TODO add others
-                });
-
-                /*var shPref = GetSharedPreferences("myData", FileCreationMode.Private);
-
-                var json = shPref.GetString("key", "");
-                var gson = new Gson();
-                if (json != "")
+                pageVM.LoadingUserInfo(new UserDTO
                 {
-                    FriendPO friend = (FriendPO)gson.FromJson(json, (Java.Lang.Reflect.IType)typeof(FriendPO));
-                    Name.Text = friend.Name;
-                    Age.Text = friend.Age.ToString();
-                }
-
-                var editor = shPref.Edit();
-                var user = new FriendPO(new UserDTO { Name = "Lizzy", Age = 21 });
-                gson = new Gson();
-
-                editor.PutString("key", gson.ToJson(user));
-                editor.Commit();*/
+                    Name = fPO.Name,
+                    Email = fPO.Email,
+                    IsActive = Convert.ToBoolean(fPO.IsActive),
+                    Age = fPO.Age,
+                    Tags = fPO.Tags,
+                    Balance = fPO.Balance,
+                    About = fPO.About,
+                    Address = fPO.Address,
+                    Company = fPO.Company,
+                    Guid = fPO.Guid,
+                    Id = fPO.Guid,
+                    Latitude = fPO.Latitude,
+                    Longitude = fPO.Longitude,
+                    Phone = fPO.Phone,
+                    Registered = fPO.Registered,
+                    FavoriteFruit = fPO.FavoriteFruit.ToFruitType(),
+                    EyeColor = fPO.EyeColor.ToEyeColorType(),
+                    Gender = fPO.Gender.ToGenderType(),
+                    Friends = fPO.Friends
+                        .Select(id => new UserDTO { Id = id })
+                        .ToList()
+                    //TODO remake it
+                }); 
             }
         }
         
@@ -106,24 +104,28 @@ namespace MyFriends.Resources
         {
             var RequestPhoneCall = 1;
             var intent = new Intent(Intent.ActionDial);
-            switch (Info[position].Type)
+            if (Info[position] is TitleWithInfoItemVM)
             {
-                case DataPairType.Phone:;
-                    intent.SetData(Android.Net.Uri.Parse("tel:" + Info[position].Info));
-                    if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.CallPhone) != Android.Content.PM.Permission.Granted)
-                        ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.CallPhone }, RequestPhoneCall);
-                    else
+                var cell = Info[position] as TitleWithInfoItemVM;
+                switch (cell.Type)
+                {
+                    case DataPairType.Phone:
+                        intent.SetData(Android.Net.Uri.Parse("tel:" + cell.Info));
+                        if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.CallPhone) != Android.Content.PM.Permission.Granted)
+                            ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.CallPhone }, RequestPhoneCall);
+                        else
+                            StartActivity(intent);
+                        break;
+                    case DataPairType.Email:
+                        intent = new Intent(Intent.ActionSendto);
+                        intent.SetData(Android.Net.Uri.FromParts("mailto", cell.Info, null));
                         StartActivity(intent);
-                    break;
-                case DataPairType.Email:
-                    intent = new Intent(Intent.ActionSendto);
-                    intent.SetData(Android.Net.Uri.FromParts("mailto",Info[position].Info, null));
-                    StartActivity(intent);
-                    break;
-                case DataPairType.Location:
-                    intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("geo:"+Info[position].Info));
-                    StartActivity(intent);
-                    break;
+                        break;
+                    case DataPairType.Location:
+                        intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("geo:" + cell.Info));
+                        StartActivity(intent);
+                        break;
+                }
             }
         }  
     }

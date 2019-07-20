@@ -21,8 +21,7 @@ namespace MyFriends.Core.ViewModels
 
         public void LoadingFriendsList()
         {
-            FriendsList = Task.Run(() =>
-                CoreContext.Api.GetUsers(new System.Threading.CancellationToken())).Result;
+            FriendsList = Task.Run(() => CoreContext.Api.GetUsers()).Result;
         }
     }
 }

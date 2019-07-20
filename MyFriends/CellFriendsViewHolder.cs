@@ -12,9 +12,9 @@ namespace MyFriends.Adarters
     public class CellFriendsViewAdapter : RecyclerView.Adapter
     {
         public event EventHandler<int> ItemClick;
-        public List<TitleWithInfoItemVM> Info { get; }
+        public List<BaseItemVM> Info { get; }
 
-        public CellFriendsViewAdapter(List<TitleWithInfoItemVM> infoList)
+        public CellFriendsViewAdapter(List<BaseItemVM> infoList)
         {
             Info = infoList;
         }
@@ -49,6 +49,17 @@ namespace MyFriends.Adarters
             }
         }
 
+        public class TitleViewHolder : RecyclerView.ViewHolder
+        {
+            public TextView Title;
+
+            public TitleViewHolder(View cell)
+                : base(cell)
+            {
+                Title = cell.FindViewById<TextView>(Resource.Id.Cell_Title_Title);
+            }
+        }
+
         public override int ItemCount => Info.Count;
 
         void OnClick(int position)
@@ -58,7 +69,7 @@ namespace MyFriends.Adarters
 
         public override int GetItemViewType(int position)
         { //TODO remake
-            return position < 3 ? 0 : 1;
+            return position < 3 ? 0 : position < 11 ? 1 : position == 11 ? 2 : 3;
         }
 
         //TODO transfer to own class
@@ -93,18 +104,34 @@ namespace MyFriends.Adarters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            if (GetItemViewType(position) == 0)
+            switch(GetItemViewType(position))
             {
-                var vh = holder as TitleWithIconViewHolder;
-                vh.Title.Text = Info[position].Title;
-                vh.Info.Text = Info[position].Info;
-                vh.Icon.SetImageResource(GetIconIdByType(Info[position].Type, Info[position].Info));
-            }
-            else
-            {
-                var vh = holder as TitleWithInfoViewHolder;
-                vh.Title.Text = Info[position].Title;
-                vh.Info.Text = Info[position].Info;
+                case 0:
+                    var titleWithIconVH = holder as TitleWithIconViewHolder;
+                    var titleWithIconItem = Info[position] as TitleWithIconItemVM;
+                    titleWithIconVH.Title.Text = titleWithIconItem.Title;
+                    titleWithIconVH.Info.Text = titleWithIconItem.Info;
+                    titleWithIconVH.Icon.SetImageResource(GetIconIdByType(titleWithIconItem.Type,
+                        titleWithIconItem.Info));
+                    break;
+                case 1:
+                    var titleWithInfoVH = holder as TitleWithInfoViewHolder;
+                    var titleWithInfoItem = Info[position] as TitleWithInfoItemVM;
+                    titleWithInfoVH.Title.Text = titleWithInfoItem.Title;
+                    titleWithInfoVH.Info.Text = titleWithInfoItem.Info;
+                    break;
+                case 2:
+                    var titleVH = holder as TitleViewHolder;
+                    var titleItem = Info[position] as TitleItemVM;
+                    titleVH.Title.Text = titleItem.Title;
+                    break;
+                case 3:
+                    var friendVH = holder as RecyclerViewHolder;
+                    var friendItem = Info[position] as FriendItemVM;
+                    friendVH.Name.Text = friendItem.Name;
+                    friendVH.Email.Text = friendItem.Email;
+                    friendVH.IsActive.Checked = friendItem.IsActive;
+                    break;
             }
         }
 
@@ -117,8 +144,21 @@ namespace MyFriends.Adarters
                     .Inflate(Resource.Layout.cell_title_with_icon, parent, false);
                 return new TitleWithIconViewHolder(view, OnClick);
             }
-            view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.cell_title_with_info, parent, false);
-            return new TitleWithInfoViewHolder(view, OnClick);
+            if (viewType == 1)
+            {
+                view = LayoutInflater.From(parent.Context)
+                    .Inflate(Resource.Layout.cell_title_with_info, parent, false);
+                return new TitleWithInfoViewHolder(view, OnClick);
+            }
+            if(viewType == 2)
+            {
+                view = LayoutInflater.From(parent.Context)
+                    .Inflate(Resource.Layout.cell_title, parent, false);
+                return new TitleViewHolder(view);
+            }
+            view = LayoutInflater.From(parent.Context)
+                    .Inflate(Resource.Layout.cell_friend, parent, false);
+            return new RecyclerViewHolder(view, OnClick);
         }
     }
 }

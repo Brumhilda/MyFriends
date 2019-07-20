@@ -67,7 +67,6 @@
     <Compile Include="Parcelables\FriendPO.cs" />
     <Compile Include="ParcelableCreator.cs" />
     <Compile Include="Helpers\TypesHelper.cs" />
-    <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -171,6 +170,7 @@
     <AndroidResource Include="Resources\drawable\separator.xml" />
     <AndroidResource Include="Resources\layout\cell_title_with_info.axml" />
     <AndroidResource Include="Resources\layout\cell_title_with_icon.axml" />
+    <AndroidResource Include="Resources\layout\cell_title.axml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />

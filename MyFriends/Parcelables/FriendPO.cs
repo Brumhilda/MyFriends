@@ -50,9 +50,9 @@ namespace MyFriends.Parcelables
             Longitude = user.Longitude;
             Tags = user.Tags;
             FavoriteFruit = user.FavoriteFruit.ToString();
-            /*Friends = user.Friends
+            Friends = user.Friends
                 .Select(x => x.Id)
-                .ToList();*/
+                .ToList();
         }
 
         public FriendPO()

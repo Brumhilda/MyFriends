@@ -7,6 +7,7 @@ namespace MyFriends.Api
 {
     public interface IMyFriendsApi
     {
-        Task<List<UserDTO>> GetUsers(CancellationToken token);
+        Task<List<UserDTO>> GetUsers();
+        Task<UserDTO> GetUserById(string id);
     }
 }

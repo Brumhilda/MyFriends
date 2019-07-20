@@ -35,27 +35,39 @@ namespace MyFriends
             pageVM.PropertyChanged += (sender, e) => {
                 if ((e as PropertyChangedEventArgs).PropertyName == nameof(pageVM.FriendsList))
                 {
-                   // var jsonFriends = JsonConvert.SerializeObject(pageVM.FriendsList);
-                   // var editor = shPref.Edit();
-                   // editor.PutString("key", jsonFriends);
-                   // editor.Commit();
-
                     var adapter = new RecyclerViewAdapter(pageVM.FriendsList);
                     adapter.ItemClick += OnItemClick;
                     FriendsList.SetAdapter(adapter);
                 }
             };
+        }
 
-            var shPref = GetSharedPreferences("myData", FileCreationMode.Private);
-            var json = shPref.GetString("key", "");
-            if (json != "")
+        protected override void OnResume()
+        {
+            base.OnResume();
+            LoadContent();
+        }
+
+        void LoadContent()
+        {
+            var shPref = GetSharedPreferences(nameof(pageVM.FriendsList), FileCreationMode.Private);
+            var json = shPref.GetString(nameof(pageVM.FriendsList), "");
+            if (json.CompareTo("") != 0)
             {
                 var usersList = JsonConvert.DeserializeObject<List<UserDTO>>(json, new JsonSerializerSettings());
                 pageVM.FriendsList = usersList;
             }
-
-           // pageVM.LoadingFriendsList();
+            else
+            {
+                pageVM.LoadingFriendsList();
+                var jsonFriends = JsonConvert.SerializeObject(pageVM.FriendsList);
+                var editor = shPref.Edit();
+                editor.PutString(nameof(pageVM.FriendsList), jsonFriends);
+                editor.Commit();
+            }
         }
+
+
 
         void OnItemClick(object sender, int position)
         {

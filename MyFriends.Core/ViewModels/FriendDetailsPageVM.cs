@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MyFriends.Api.DTOs;
+using System.Threading.Tasks;
 
 namespace MyFriends.Core.ViewModels
 {
@@ -11,7 +12,7 @@ namespace MyFriends.Core.ViewModels
         private string age;
         private string tags;
         private bool isActive;
-        private List<TitleWithInfoItemVM> userInfo = new List<TitleWithInfoItemVM>();
+        private List<BaseItemVM> userInfo = new List<BaseItemVM>();
 
         public string Name
         {
@@ -53,7 +54,7 @@ namespace MyFriends.Core.ViewModels
             }
         }
 
-        public List<TitleWithInfoItemVM> UserInfo
+        public List<BaseItemVM> UserInfo
         {
             get { return userInfo; }
             set
@@ -70,7 +71,7 @@ namespace MyFriends.Core.ViewModels
             Tags = "#" + string.Join(" #", user.Tags);
             IsActive = user.IsActive;
             
-            UserInfo = new List<TitleWithInfoItemVM>
+            UserInfo = new List<BaseItemVM>
             {
                 new TitleWithIconItemVM(nameof(user.Gender), user.Gender.ToString(), DataPairType.Gender),
                 new TitleWithIconItemVM(nameof(user.EyeColor), user.EyeColor.ToString(), DataPairType.EyeColor),
@@ -83,8 +84,12 @@ namespace MyFriends.Core.ViewModels
                 new TitleWithInfoItemVM(nameof(user.Balance) , user.Balance, DataPairType.Default),
                 new TitleWithInfoItemVM(nameof(user.Company) , user.Company, DataPairType.Default),
                 new TitleWithInfoItemVM(nameof(user.About) , user.About, DataPairType.Default),
-                new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered, DataPairType.Default)
+                new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered, DataPairType.Default),
+                new TitleItemVM(nameof(user.Friends))
             };
+
+            UserInfo.AddRange(user.Friends
+                .Select(u => new FriendItemVM(CoreContext.Api.GetUserById(u.Id).Result)));
         }
 
     }
