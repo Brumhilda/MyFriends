@@ -4,6 +4,7 @@ using Android.Support.V7.App;
 using Android.Content;
 using Android.Widget;
 using Android.Support.V7.Widget;
+using Android.Support.V4.Widget;
 using MyFriends.Resources;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using MyFriends.Parcelables;
 using MyFriends.Api.DTOs;
 using Newtonsoft.Json;
 using Android.Content.PM;
+using System;
 
 namespace MyFriends
 {
@@ -21,6 +23,7 @@ namespace MyFriends
     {
         FriendsPageVM pageVM;
         RecyclerView FriendsList;
+        SwipeRefreshLayout SRLayout;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,6 +32,8 @@ namespace MyFriends
             FriendsList = FindViewById<RecyclerView>(Resource.Id.friendsList);
             FriendsList.HasFixedSize = false;
             FriendsList.SetLayoutManager(new LinearLayoutManager(this));
+            SRLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.Page_Friends_SRLayout);
+            SRLayout.Refresh += OnRefresh;
 
             pageVM = new FriendsPageVM();
             
@@ -48,6 +53,12 @@ namespace MyFriends
             LoadContent();
         }
 
+        void OnRefresh(object sender, EventArgs e)
+        {
+            UpdateData();
+            SRLayout.Refreshing = false;
+        }
+
         void LoadContent()
         {
             var shPref = GetSharedPreferences(nameof(pageVM.FriendsList), FileCreationMode.Private);
@@ -58,23 +69,28 @@ namespace MyFriends
                 pageVM.FriendsList = usersList;
             }
             else
-            {
-                pageVM.LoadingFriendsList();
-                var jsonFriends = JsonConvert.SerializeObject(pageVM.FriendsList);
-                var editor = shPref.Edit();
-                editor.PutString(nameof(pageVM.FriendsList), jsonFriends);
-                editor.Commit();
-            }
+                UpdateData();
         }
 
-
+        void UpdateData()
+        {
+            var shPref = GetSharedPreferences(nameof(pageVM.FriendsList), FileCreationMode.Private);
+            pageVM.LoadingFriendsList();
+            var jsonFriends = JsonConvert.SerializeObject(pageVM.FriendsList);
+            var editor = shPref.Edit();
+            editor.PutString(nameof(pageVM.FriendsList), jsonFriends);
+            editor.Commit();
+        }
 
         void OnItemClick(object sender, int position)
         {
-            var po = new FriendPO(pageVM.FriendsList[position]);
-            var intent = new Intent(this, typeof(FriendDetailsActivity));
-            intent.PutExtra(nameof(FriendPO), po);
-            StartActivity(intent);
+            if (pageVM.FriendsList[position].IsActive)
+            {
+                var po = new FriendPO(pageVM.FriendsList[position]);
+                var intent = new Intent(this, typeof(FriendDetailsActivity));
+                intent.PutExtra(nameof(FriendPO), po);
+                StartActivity(intent);
+            }
         }
     }
 }

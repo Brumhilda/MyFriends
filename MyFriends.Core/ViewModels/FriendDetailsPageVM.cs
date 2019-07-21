@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MyFriends.Api.DTOs;
 using System.Threading.Tasks;
+using System;
 
 namespace MyFriends.Core.ViewModels
 {
@@ -70,7 +71,7 @@ namespace MyFriends.Core.ViewModels
             Age = user.Age.ToString() + " y.o.";
             Tags = "#" + string.Join(" #", user.Tags);
             IsActive = user.IsActive;
-            
+
             UserInfo = new List<BaseItemVM>
             {
                 new TitleWithIconItemVM(nameof(user.Gender), user.Gender.ToString(), DataPairType.Gender),
@@ -84,7 +85,7 @@ namespace MyFriends.Core.ViewModels
                 new TitleWithInfoItemVM(nameof(user.Balance) , user.Balance, DataPairType.Default),
                 new TitleWithInfoItemVM(nameof(user.Company) , user.Company, DataPairType.Default),
                 new TitleWithInfoItemVM(nameof(user.About) , user.About, DataPairType.Default),
-                new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered, DataPairType.Default),
+                new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered.ToDateFormat("HH:mm dd.MM.yy"), DataPairType.Default),
                 new TitleItemVM(nameof(user.Friends))
             };
 

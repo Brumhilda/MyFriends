@@ -54,6 +54,7 @@ namespace MyFriends
             Name = cell.FindViewById<TextView>(Resource.Id.Cell_Friend_Name);
             Email = cell.FindViewById<TextView>(Resource.Id.Cell_Friend_Email);
             IsActive = cell.FindViewById<RadioButton>(Resource.Id.Cell_Friend_IsActive);
+            IsActive.Click += null;
             cell.Click += (sender, e) => listener(base.LayoutPosition);
         }
     }

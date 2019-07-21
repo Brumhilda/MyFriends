@@ -131,6 +131,9 @@ namespace MyFriends.Adarters
                     friendVH.Name.Text = friendItem.Name;
                     friendVH.Email.Text = friendItem.Email;
                     friendVH.IsActive.Checked = friendItem.IsActive;
+                    friendVH.IsActive.SetText(friendItem.IsActive
+                        ? Resource.String.isActive
+                        : Resource.String.notActive);
                     break;
             }
         }

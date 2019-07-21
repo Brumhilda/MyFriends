@@ -11,10 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="8dp"
+        android:background="@android:color/white"
         style="@style/TitleText"/>
-    <View
-        android:id="@+id/Cell_Title_Separator"
-        android:background="@color/material_grey_100"
-        android:layout_height="1dp"
-        android:layout_width="match_parent"/>
 </LinearLayout>

@@ -128,7 +128,7 @@ namespace MyFriends.Resources
                         break;
                 }
             }
-            else if (Info[position] is FriendItemVM)
+            else if (Info[position] is FriendItemVM && (Info[position] as FriendItemVM).IsActive)
             {
                 var friend = Info[position] as FriendItemVM;
                 foreach(var user in CoreContext.Cache)

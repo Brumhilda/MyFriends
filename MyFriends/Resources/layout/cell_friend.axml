@@ -7,7 +7,7 @@
     android:background="@android:color/white">
     <TextView
         android:id="@+id/Cell_Friend_Name"
-        style="@style/TitleText"
+        style="@style/StandardText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -16,7 +16,6 @@
         android:text="Лизка Бульк"/>
     <TextView
         android:id="@+id/Cell_Friend_Email"
-        style="@style/StandardText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
