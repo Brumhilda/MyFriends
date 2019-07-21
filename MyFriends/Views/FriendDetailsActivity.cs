@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using Android.Support.V7.Widget;
+using Android.Support.V7.App;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +14,16 @@ using MyFriends.Core;
 using MyFriends.Core.ViewModels;
 using MyFriends.Api.DTOs;
 using Android;
-using Android.Support.V4.Content; 
+using Android.Support.V4.Content;
 using Android.Support.V4.App;
+using Android.Views;
 
 namespace MyFriends.Resources
 {
     [Activity(Label = "FriendDetailsActivity")]
-    public class FriendDetailsActivity : Activity
+    public class FriendDetailsActivity : AppCompatActivity
     {
+        Android.Support.V7.App.ActionBar ActionBar;
         FriendDetailsPageVM pageVM;
         TextView Name;
         TextView Age;
@@ -29,12 +32,16 @@ namespace MyFriends.Resources
         RecyclerView InfoList;
         List<BaseItemVM> Info;
 
-        ISharedPreferences sharedPreferences;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.page_friend_details);
+            if (SupportActionBar != null)
+            {
+                ActionBar = SupportActionBar;
+                ActionBar.SetDisplayHomeAsUpEnabled(true);
+            }
+
             Name = FindViewById<TextView>(Resource.Id.Page_FriendDetails_Name);
             Age = FindViewById<TextView>(Resource.Id.Page_FriendDetails_Age);
             IsActive = FindViewById<RadioButton>(Resource.Id.Page_FriendDetails_IsActive);
@@ -54,6 +61,7 @@ namespace MyFriends.Resources
                     {
                         case nameof(pageVM.Name):
                             Name.Text = pageVM.Name;
+                            ActionBar.Title = Name.Text;
                             break;
                         case nameof(pageVM.IsActive):
                             IsActive.Checked = pageVM.IsActive;
@@ -99,7 +107,18 @@ namespace MyFriends.Resources
                 }); 
             }
         }
-        
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    Finish();
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
         void OnItemClick(object sender, int position)
         {
             var RequestPhoneCall = 1;

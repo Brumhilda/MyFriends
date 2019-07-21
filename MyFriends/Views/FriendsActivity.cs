@@ -63,7 +63,7 @@ namespace MyFriends
         {
             var shPref = GetSharedPreferences(nameof(pageVM.FriendsList), FileCreationMode.Private);
             var json = shPref.GetString(nameof(pageVM.FriendsList), "");
-            if (json.CompareTo("") != 0)
+            if (!string.IsNullOrEmpty(json))
             {
                 var usersList = JsonConvert.DeserializeObject<List<UserDTO>>(json, new JsonSerializerSettings());
                 pageVM.FriendsList = usersList;
@@ -76,7 +76,9 @@ namespace MyFriends
         {
             var shPref = GetSharedPreferences(nameof(pageVM.FriendsList), FileCreationMode.Private);
             pageVM.LoadingFriendsList();
-            var jsonFriends = JsonConvert.SerializeObject(pageVM.FriendsList);
+            var jsonFriends = pageVM.FriendsList != null
+                ? JsonConvert.SerializeObject(pageVM.FriendsList)
+                : "";
             var editor = shPref.Edit();
             editor.PutString(nameof(pageVM.FriendsList), jsonFriends);
             editor.Commit();

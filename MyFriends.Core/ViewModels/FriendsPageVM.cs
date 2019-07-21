@@ -20,9 +20,10 @@ namespace MyFriends.Core.ViewModels
             }
         }
 
-        public void LoadingFriendsList()
+        async public void LoadingFriendsList()
         {
-            FriendsList = Task.Run(() => CoreContext.Api.GetUsers()).Result;
+            var task = await CoreContext.Api.GetUsers();
+            FriendsList = task;
         }
     }
 }
