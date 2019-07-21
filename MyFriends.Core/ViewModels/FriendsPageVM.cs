@@ -15,6 +15,7 @@ namespace MyFriends.Core.ViewModels
             set
             {
                 friendsList = value;
+                CoreContext.Cache = friendsList;
                 OnPropertyChanged(nameof(FriendsList));
             }
         }

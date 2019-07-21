@@ -103,13 +103,14 @@ namespace MyFriends.Resources
         void OnItemClick(object sender, int position)
         {
             var RequestPhoneCall = 1;
-            var intent = new Intent(Intent.ActionDial);
+            Intent intent;
             if (Info[position] is TitleWithInfoItemVM)
             {
                 var cell = Info[position] as TitleWithInfoItemVM;
                 switch (cell.Type)
                 {
                     case DataPairType.Phone:
+                        intent = new Intent(Intent.ActionDial);
                         intent.SetData(Android.Net.Uri.Parse("tel:" + cell.Info));
                         if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.CallPhone) != Android.Content.PM.Permission.Granted)
                             ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.CallPhone }, RequestPhoneCall);
@@ -126,6 +127,19 @@ namespace MyFriends.Resources
                         StartActivity(intent);
                         break;
                 }
+            }
+            else if (Info[position] is FriendItemVM)
+            {
+                var friend = Info[position] as FriendItemVM;
+                foreach(var user in CoreContext.Cache)
+                    if(user.Id == friend.Id)
+                    {
+                        var po = new FriendPO(user);
+                        intent = new Intent(this, typeof(FriendDetailsActivity));
+                        intent.PutExtra(nameof(FriendPO), po);
+                        StartActivity(intent);
+                        break;
+                    }
             }
         }  
     }

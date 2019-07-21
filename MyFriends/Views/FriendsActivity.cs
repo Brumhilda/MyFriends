@@ -7,7 +7,7 @@ using Android.Support.V7.Widget;
 using MyFriends.Resources;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Linq;
+using MyFriends.Core;
 using MyFriends.Core.ViewModels;
 using MyFriends.Parcelables;
 using MyFriends.Api.DTOs;

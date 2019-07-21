@@ -77,7 +77,7 @@ namespace MyFriends.Core.ViewModels
                 new TitleWithIconItemVM(nameof(user.EyeColor), user.EyeColor.ToString(), DataPairType.EyeColor),
                 new TitleWithIconItemVM(nameof(user.FavoriteFruit), user.FavoriteFruit.ToString(), DataPairType.Fruit),
                 new TitleWithInfoItemVM("Location" , user.Latitude.ToString(CultureInfo.CreateSpecificCulture("en-CA"))
-                +" ,"+ user.Longitude.ToString(CultureInfo.CreateSpecificCulture("en-CA")), DataPairType.Location),
+                +", "+ user.Longitude.ToString(CultureInfo.CreateSpecificCulture("en-CA")), DataPairType.Location),
                 new TitleWithInfoItemVM(nameof(user.Email) , user.Email, DataPairType.Email),
                 new TitleWithInfoItemVM(nameof(user.Phone) , user.Phone, DataPairType.Phone),
                 new TitleWithInfoItemVM(nameof(user.Address) , user.Address, DataPairType.Default),
@@ -88,8 +88,12 @@ namespace MyFriends.Core.ViewModels
                 new TitleItemVM(nameof(user.Friends))
             };
 
-            UserInfo.AddRange(user.Friends
-                .Select(u => new FriendItemVM(CoreContext.Api.GetUserById(u.Id).Result)));
+            if (CoreContext.Cache.Count > 0)
+                UserInfo.AddRange(user.Friends.Select(f => new FriendItemVM(CoreContext.Cache
+                .Where(u => u.Id == f.Id).First())));
+            else
+                UserInfo.AddRange(user.Friends
+                    .Select(u => new FriendItemVM(CoreContext.Api.GetUserById(u.Id).Result)));
         }
 
     }
