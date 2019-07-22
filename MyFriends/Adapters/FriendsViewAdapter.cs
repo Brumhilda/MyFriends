@@ -30,8 +30,6 @@ namespace MyFriends
             vh.Name.Text = Friends[position].Name;
             vh.Email.Text = Friends[position].Email;
             vh.IsActive.Checked = Friends[position].IsActive;
-            if (!Friends[position].IsActive)
-                vh.IsActive.Enabled = false;
             vh.IsActive.SetText(Friends[position].IsActive
                 ? Resource.String.isActive
                 : Resource.String.notActive);
