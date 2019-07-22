@@ -15,6 +15,7 @@ using Android.Support.V4.Content;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Content.PM;
+using MyFriends.Api.DTOs;
 
 namespace MyFriends.Resources
 {
@@ -48,38 +49,46 @@ namespace MyFriends.Resources
             InfoList.HasFixedSize = false;
             InfoList.SetLayoutManager(new LinearLayoutManager(this));
 
-            FriendPO fPO = new FriendPO();
+            pageVM = new FriendDetailsPageVM();
+            pageVM.PropertyChanged += (sender, e) =>
+            {
+                switch ((e as PropertyChangedEventArgs).PropertyName)
+                {
+                    case nameof(pageVM.Name):
+                        Name.Text = pageVM.Name;
+                        ActionBar.Title = Name.Text;
+                        break;
+                    case nameof(pageVM.IsActive):
+                        IsActive.Checked = pageVM.IsActive;
+                        break;
+                    case nameof(pageVM.Age):
+                        Age.Text = pageVM.Age;
+                        break;
+                    case nameof(pageVM.Tags):
+                        Tags.Text = pageVM.Tags;
+                        break;
+                    case nameof(pageVM.UserInfo):
+                        Info = pageVM.UserInfo;
+                        var adapter = new FriendDetailsViewAdapter(Info);
+                        adapter.ItemClick += OnItemClick;
+                        InfoList.SetAdapter(adapter);
+                        break;
+                }
+            };
+            pageVM.LoadingUserInfo(GetUserInfo());
+
+
+        }
+
+        UserDTO GetUserInfo()
+        {
+            var fPO = new FriendPO();
             if (Intent.Extras != null)
             {
                 fPO = Intent.GetParcelableExtra(nameof(FriendPO)) as FriendPO;
-                pageVM = new FriendDetailsPageVM();
-                pageVM.PropertyChanged += (sender, e) =>
-                {
-                    switch ((e as PropertyChangedEventArgs).PropertyName)
-                    {
-                        case nameof(pageVM.Name):
-                            Name.Text = pageVM.Name;
-                            ActionBar.Title = Name.Text;
-                            break;
-                        case nameof(pageVM.IsActive):
-                            IsActive.Checked = pageVM.IsActive;
-                            break;
-                        case nameof(pageVM.Age):
-                            Age.Text = pageVM.Age;
-                            break;
-                        case nameof(pageVM.Tags):
-                            Tags.Text = pageVM.Tags;
-                            break;
-                        case nameof(pageVM.UserInfo):
-                            Info = pageVM.UserInfo;
-                            var adapter = new FriendDetailsViewAdapter(Info);
-                            adapter.ItemClick += OnItemClick;
-                            InfoList.SetAdapter(adapter);
-                            break;
-                    }
-                };
-                pageVM.LoadingUserInfo(fPO.ToUserDTO());
+                return fPO.ToUserDTO();
             }
+            return null;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -95,27 +104,26 @@ namespace MyFriends.Resources
 
         void OnItemClick(object sender, int position)
         {
-            var RequestPhoneCall = 1;
             Intent intent;
             if (Info[position] is TitleWithInfoItemVM)
             {
                 var cell = Info[position] as TitleWithInfoItemVM;
                 switch (cell.Type)
                 {
-                    case DataPairType.Phone:
+                    case UserInfoType.Phone:
                         intent = new Intent(Intent.ActionDial);
                         intent.SetData(Android.Net.Uri.Parse("tel:" + cell.Info));
                         if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.CallPhone) != Android.Content.PM.Permission.Granted)
-                            ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.CallPhone }, RequestPhoneCall);
+                            ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.CallPhone }, 1);
                         else
                             StartActivity(intent);
                         break;
-                    case DataPairType.Email:
+                    case UserInfoType.Email:
                         intent = new Intent(Intent.ActionSendto);
                         intent.SetData(Android.Net.Uri.FromParts("mailto", cell.Info, null));
                         StartActivity(intent);
                         break;
-                    case DataPairType.Location:
+                    case UserInfoType.Location:
                         intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("geo:" + cell.Info));
                         StartActivity(intent);
                         break;

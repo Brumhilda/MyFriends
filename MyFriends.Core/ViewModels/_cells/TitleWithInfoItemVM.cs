@@ -3,9 +3,9 @@
     public class TitleWithInfoItemVM : TitleItemVM
     {
         public string Info { get; }
-        public DataPairType Type { get; }
+        public UserInfoType Type { get; }
 
-        public TitleWithInfoItemVM(string title, string info, DataPairType type)
+        public TitleWithInfoItemVM(string title, string info, UserInfoType type)
             : base(title)
         {
             Info = info;

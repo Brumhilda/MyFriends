@@ -67,34 +67,37 @@ namespace MyFriends.Core.ViewModels
 
         public void LoadingUserInfo(UserDTO user)
         {
-            Name = user.Name;
-            Age = user.Age.ToString() + " y.o.";
-            Tags = "#" + string.Join(" #", user.Tags);
-            IsActive = user.IsActive;
-
-            UserInfo = new List<BaseItemVM>
+            if (user != null)
             {
-                new TitleWithIconItemVM(nameof(user.Gender), user.Gender.ToString(), DataPairType.Gender),
-                new TitleWithIconItemVM(nameof(user.EyeColor), user.EyeColor.ToString(), DataPairType.EyeColor),
-                new TitleWithIconItemVM(nameof(user.FavoriteFruit), user.FavoriteFruit.ToString(), DataPairType.Fruit),
-                new TitleWithInfoItemVM("Location" , user.Latitude.ToString(CultureInfo.CreateSpecificCulture("en-CA"))
-                +", "+ user.Longitude.ToString(CultureInfo.CreateSpecificCulture("en-CA")), DataPairType.Location),
-                new TitleWithInfoItemVM(nameof(user.Email) , user.Email, DataPairType.Email),
-                new TitleWithInfoItemVM(nameof(user.Phone) , user.Phone, DataPairType.Phone),
-                new TitleWithInfoItemVM(nameof(user.Address) , user.Address, DataPairType.Default),
-                new TitleWithInfoItemVM(nameof(user.Balance) , user.Balance, DataPairType.Default),
-                new TitleWithInfoItemVM(nameof(user.Company) , user.Company, DataPairType.Default),
-                new TitleWithInfoItemVM(nameof(user.About) , user.About, DataPairType.Default),
-                new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered.ToDateFormat("HH:mm dd.MM.yy"), DataPairType.Default),
-                new TitleItemVM(nameof(user.Friends))
-            };
+                Name = user.Name;
+                Age = user.Age.ToString() + " y.o.";
+                Tags = "#" + string.Join(" #", user.Tags);
+                IsActive = user.IsActive;
 
-            if (CoreContext.Cache.Count > 0)
-                UserInfo.AddRange(user.Friends.Select(f => new FriendItemVM(CoreContext.Cache
-                .Where(u => u.Id == f.Id).First())));
-            else
-                UserInfo.AddRange(user.Friends
-                    .Select(u => new FriendItemVM(CoreContext.Api.GetUserById(u.Id).Result)));
+                UserInfo = new List<BaseItemVM>
+                {
+                    new TitleWithIconItemVM(nameof(user.Gender), user.Gender.ToString(), UserInfoType.Gender),
+                    new TitleWithIconItemVM(nameof(user.EyeColor), user.EyeColor.ToString(), UserInfoType.EyeColor),
+                    new TitleWithIconItemVM(nameof(user.FavoriteFruit), user.FavoriteFruit.ToString(), UserInfoType.Fruit),
+                    new TitleWithInfoItemVM("Location" , user.Latitude.ToString(CultureInfo.CreateSpecificCulture("en-CA"))
+                    +", "+ user.Longitude.ToString(CultureInfo.CreateSpecificCulture("en-CA")), UserInfoType.Location),
+                    new TitleWithInfoItemVM(nameof(user.Email) , user.Email, UserInfoType.Email),
+                    new TitleWithInfoItemVM(nameof(user.Phone) , user.Phone, UserInfoType.Phone),
+                    new TitleWithInfoItemVM(nameof(user.Address) , user.Address, UserInfoType.Default),
+                    new TitleWithInfoItemVM(nameof(user.Balance) , user.Balance, UserInfoType.Default),
+                    new TitleWithInfoItemVM(nameof(user.Company) , user.Company, UserInfoType.Default),
+                    new TitleWithInfoItemVM(nameof(user.About) , user.About, UserInfoType.Default),
+                    new TitleWithInfoItemVM(nameof(user.Registered) , user.Registered.ToDateFormat("HH:mm dd.MM.yy"), UserInfoType.Default),
+                    new TitleItemVM(nameof(user.Friends))
+                };
+    
+                if (CoreContext.Cache.Count > 0)
+                    UserInfo.AddRange(user.Friends.Select(f => new FriendItemVM(CoreContext.Cache
+                    .Where(u => u.Id == f.Id).First())));
+                else
+                    UserInfo.AddRange(user.Friends
+                        .Select(u => new FriendItemVM(CoreContext.Api.GetUserById(u.Id).Result)));
+            }
         }
 
     }

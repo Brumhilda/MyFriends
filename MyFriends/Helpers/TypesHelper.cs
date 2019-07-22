@@ -36,11 +36,11 @@ namespace MyFriends
                         : FruitType.Other;
         }
 
-        public static int GetIconId(this string str, DataPairType type)
+        public static int GetIconId(this string str, UserInfoType type)
         {
             switch (type)
             {
-                case DataPairType.Fruit:
+                case UserInfoType.Fruit:
                     var fruitType = str.ToFruitType();
                     return fruitType == FruitType.Apple
                         ? Resource.Mipmap.ic_fruit_apple
@@ -49,14 +49,14 @@ namespace MyFriends
                             : fruitType == FruitType.Strawberry
                                 ? Resource.Mipmap.ic_fruit_strawberry
                                 : 0;
-                case DataPairType.Gender:
+                case UserInfoType.Gender:
                     var gender = str.ToGenderType();
                     return gender == GenderType.Female
                         ? Resource.Mipmap.ic_gender_female
                         : gender == GenderType.Male
                             ? Resource.Mipmap.ic_gender_male
                             : 0;
-                case DataPairType.EyeColor:
+                case UserInfoType.EyeColor:
                     var eyeColor = str.ToEyeColorType();
                     return eyeColor == EyeColorType.Blue
                         ? Resource.Mipmap.ic_eye_blue

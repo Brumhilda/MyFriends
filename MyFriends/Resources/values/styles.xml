@@ -20,7 +20,7 @@
     </style>
     <style name="StandardText">
         <item name="android:textSize">16dp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
     <style name="TitleText">
         <item name="android:textSize">20dp</item>

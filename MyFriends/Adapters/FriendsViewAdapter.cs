@@ -7,12 +7,12 @@ using MyFriends.Api.DTOs;
 
 namespace MyFriends
 {
-    public class RecyclerViewAdapter : RecyclerView.Adapter
+    public class FriendsViewAdapter : RecyclerView.Adapter
     {
         public event EventHandler<int> ItemClick;
         public List<UserDTO> Friends { get; }
 
-        public RecyclerViewAdapter(List<UserDTO> friendsList)
+        public FriendsViewAdapter(List<UserDTO> friendsList)
         {
             Friends = friendsList;
         }
@@ -30,6 +30,8 @@ namespace MyFriends
             vh.Name.Text = Friends[position].Name;
             vh.Email.Text = Friends[position].Email;
             vh.IsActive.Checked = Friends[position].IsActive;
+            if (!Friends[position].IsActive)
+                vh.IsActive.Enabled = false;
             vh.IsActive.SetText(Friends[position].IsActive
                 ? Resource.String.isActive
                 : Resource.String.notActive);

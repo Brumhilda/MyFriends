@@ -16,7 +16,7 @@ using System;
 
 namespace MyFriends
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait)]
     public class FriendsActivity : AppCompatActivity
     {
         FriendsPageVM pageVM;
@@ -34,20 +34,14 @@ namespace MyFriends
             SRLayout.Refresh += OnRefresh;
 
             pageVM = new FriendsPageVM();
-            
             pageVM.PropertyChanged += (sender, e) => {
                 if ((e as PropertyChangedEventArgs).PropertyName == nameof(pageVM.FriendsList))
                 {
-                    var adapter = new RecyclerViewAdapter(pageVM.FriendsList);
+                    var adapter = new FriendsViewAdapter(pageVM.FriendsList);
                     adapter.ItemClick += OnItemClick;
                     FriendsList.SetAdapter(adapter);
                 }
             };
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
             LoadContent();
         }
 

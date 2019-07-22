@@ -4,7 +4,7 @@ namespace MyFriends.Core.ViewModels
 {
     public class TitleWithIconItemVM : TitleWithInfoItemVM
     {
-        public TitleWithIconItemVM(string title, string info, DataPairType type)
+        public TitleWithIconItemVM(string title, string info, UserInfoType type)
             :base (title, info, type)
         {
         }

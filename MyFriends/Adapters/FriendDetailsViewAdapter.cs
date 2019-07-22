@@ -64,6 +64,8 @@ namespace MyFriends.Adarters
                     friendVH.Name.Text = friendItem.Name;
                     friendVH.Email.Text = friendItem.Email;
                     friendVH.IsActive.Checked = friendItem.IsActive;
+                    if (!friendItem.IsActive)
+                        friendVH.IsActive.Enabled = false;
                     friendVH.IsActive.SetText(friendItem.IsActive
                         ? Resource.String.isActive
                         : Resource.String.notActive);

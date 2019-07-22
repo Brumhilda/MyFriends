@@ -1,7 +1,7 @@
 ﻿using System;
 namespace MyFriends.Core
 {
-    public enum DataPairType
+    public enum UserInfoType
     {
         Phone,
         Email,
