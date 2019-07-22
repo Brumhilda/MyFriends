@@ -63,10 +63,14 @@
     <Compile Include="RecyclerViewAdapter.cs" />
     <Compile Include="Views\FriendDetailsActivity.cs" />
     <Compile Include="Views\FriendsActivity.cs" />
-    <Compile Include="CellFriendsViewHolder.cs" />
+    <Compile Include="FriendDetailsViewAdapter.cs" />
     <Compile Include="Parcelables\FriendPO.cs" />
     <Compile Include="ParcelableCreator.cs" />
     <Compile Include="Helpers\TypesHelper.cs" />
+    <Compile Include="ViewHolders\FriendViewHolder.cs" />
+    <Compile Include="ViewHolders\TitleViewHolder.cs" />
+    <Compile Include="ViewHolders\TitleWithInfoViewHolder.cs" />
+    <Compile Include="ViewHolders\TitleWithIconViewHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -199,6 +203,7 @@
     <Folder Include="Views\" />
     <Folder Include="Parcelables\" />
     <Folder Include="Helpers\" />
+    <Folder Include="ViewHolders\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

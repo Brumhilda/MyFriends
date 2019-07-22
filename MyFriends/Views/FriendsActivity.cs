@@ -2,13 +2,11 @@
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Content;
-using Android.Widget;
 using Android.Support.V7.Widget;
 using Android.Support.V4.Widget;
 using MyFriends.Resources;
 using System.ComponentModel;
 using System.Collections.Generic;
-using MyFriends.Core;
 using MyFriends.Core.ViewModels;
 using MyFriends.Parcelables;
 using MyFriends.Api.DTOs;

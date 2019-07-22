@@ -1,4 +1,5 @@
 ﻿using MyFriends.Api;
+using MyFriends.Core;
 
 namespace MyFriends
 {
@@ -35,9 +36,38 @@ namespace MyFriends
                         : FruitType.Other;
         }
 
-        public static int GetIconId(this string str)
+        public static int GetIconId(this string str, DataPairType type)
         {
-            return 0;
+            switch (type)
+            {
+                case DataPairType.Fruit:
+                    var fruitType = str.ToFruitType();
+                    return fruitType == FruitType.Apple
+                        ? Resource.Mipmap.ic_fruit_apple
+                        : fruitType == FruitType.Banana
+                            ? Resource.Mipmap.ic_fruit_banana
+                            : fruitType == FruitType.Strawberry
+                                ? Resource.Mipmap.ic_fruit_strawberry
+                                : 0;
+                case DataPairType.Gender:
+                    var gender = str.ToGenderType();
+                    return gender == GenderType.Female
+                        ? Resource.Mipmap.ic_gender_female
+                        : gender == GenderType.Male
+                            ? Resource.Mipmap.ic_gender_male
+                            : 0;
+                case DataPairType.EyeColor:
+                    var eyeColor = str.ToEyeColorType();
+                    return eyeColor == EyeColorType.Blue
+                        ? Resource.Mipmap.ic_eye_blue
+                        : eyeColor == EyeColorType.Brown
+                            ? Resource.Mipmap.ic_eye_brown
+                            : eyeColor == EyeColorType.Green
+                                ? Resource.Mipmap.ic_eye_green
+                                : 0;
+                default:
+                    return 0;
+            }
         }
     }
 }

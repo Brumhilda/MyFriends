@@ -4,23 +4,21 @@ using Android.OS;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using Android.Support.V7.App;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using MyFriends.Adarters;
 using MyFriends.Parcelables;
 using MyFriends.Core;
 using MyFriends.Core.ViewModels;
-using MyFriends.Api.DTOs;
 using Android;
 using Android.Support.V4.Content;
 using Android.Support.V4.App;
 using Android.Views;
+using Android.Content.PM;
 
 namespace MyFriends.Resources
 {
-    [Activity(Label = "FriendDetailsActivity")]
+    [Activity(Label = "FriendDetailsActivity", ScreenOrientation = ScreenOrientation.Portrait)]
     public class FriendDetailsActivity : AppCompatActivity
     {
         Android.Support.V7.App.ActionBar ActionBar;
@@ -57,7 +55,7 @@ namespace MyFriends.Resources
                 pageVM = new FriendDetailsPageVM();
                 pageVM.PropertyChanged += (sender, e) =>
                 {
-                    switch((e as PropertyChangedEventArgs).PropertyName)
+                    switch ((e as PropertyChangedEventArgs).PropertyName)
                     {
                         case nameof(pageVM.Name):
                             Name.Text = pageVM.Name;
@@ -74,37 +72,13 @@ namespace MyFriends.Resources
                             break;
                         case nameof(pageVM.UserInfo):
                             Info = pageVM.UserInfo;
-                            var adapter = new CellFriendsViewAdapter(Info);
+                            var adapter = new FriendDetailsViewAdapter(Info);
                             adapter.ItemClick += OnItemClick;
                             InfoList.SetAdapter(adapter);
                             break;
                     }
                 };
-                pageVM.LoadingUserInfo(new UserDTO
-                {
-                    Name = fPO.Name,
-                    Email = fPO.Email,
-                    IsActive = Convert.ToBoolean(fPO.IsActive),
-                    Age = fPO.Age,
-                    Tags = fPO.Tags,
-                    Balance = fPO.Balance,
-                    About = fPO.About,
-                    Address = fPO.Address,
-                    Company = fPO.Company,
-                    Guid = fPO.Guid,
-                    Id = fPO.Guid,
-                    Latitude = fPO.Latitude,
-                    Longitude = fPO.Longitude,
-                    Phone = fPO.Phone,
-                    Registered = fPO.Registered,
-                    FavoriteFruit = fPO.FavoriteFruit.ToFruitType(),
-                    EyeColor = fPO.EyeColor.ToEyeColorType(),
-                    Gender = fPO.Gender.ToGenderType(),
-                    Friends = fPO.Friends
-                        .Select(id => new UserDTO { Id = id })
-                        .ToList()
-                    //TODO remake it
-                }); 
+                pageVM.LoadingUserInfo(fPO.ToUserDTO());
             }
         }
 
@@ -150,8 +124,8 @@ namespace MyFriends.Resources
             else if (Info[position] is FriendItemVM && (Info[position] as FriendItemVM).IsActive)
             {
                 var friend = Info[position] as FriendItemVM;
-                foreach(var user in CoreContext.Cache)
-                    if(user.Id == friend.Id)
+                foreach (var user in CoreContext.Cache)
+                    if (user.Id == friend.Id)
                     {
                         var po = new FriendPO(user);
                         intent = new Intent(this, typeof(FriendDetailsActivity));
@@ -160,6 +134,6 @@ namespace MyFriends.Resources
                         break;
                     }
             }
-        }  
+        }
     }
 }

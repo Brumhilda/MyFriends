@@ -86,6 +86,34 @@ namespace MyFriends.Parcelables
             Friends = friends.ToList();
         }
 
+        public UserDTO ToUserDTO()
+        {
+            return new UserDTO
+            {
+                Name = Name,
+                Email = Email,
+                IsActive = Convert.ToBoolean(IsActive),
+                Age = Age,
+                Tags = Tags,
+                Balance = Balance,
+                About = About,
+                Address = Address,
+                Company = Company,
+                Guid = Guid,
+                Id = Guid,
+                Latitude = Latitude,
+                Longitude = Longitude,
+                Phone = Phone,
+                Registered = Registered,
+                FavoriteFruit = FavoriteFruit.ToFruitType(),
+                EyeColor = EyeColor.ToEyeColorType(),
+                Gender = Gender.ToGenderType(),
+                Friends = Friends
+                        .Select(id => new UserDTO { Id = id })
+                        .ToList()
+            };
+        }
+
         public int DescribeContents()
         {
             return 0;
